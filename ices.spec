@@ -2,17 +2,19 @@ Summary:	ices - Program for feeding MP3 streams to an Icecast server
 Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
 Name:		ices
 Version:	0.2.2
-Release:	0.2
+Release:	0.3
 License:	GPL v2
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/releases/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
+Source2:	%{name}.conf.txt
 Patch0:		%{name}-libtool_fix.patch
 URL:		http://www.icecast.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
+Requires:	lame-libs
 Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
 Requires(pre):	/usr/sbin/groupadd
@@ -50,6 +52,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/{rc.d/init.d,icecast}
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/ices
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/icecast/ices.conf.txt
 
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/ices.conf.dist $RPM_BUILD_ROOT%{_sysconfdir}/icecast/%{name}.conf.dist
 
@@ -96,5 +99,6 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS.gz BUGS.gz CHANGES.gz COPYING.gz FAQ.gz README.gz TESTED.gz doc/%{name}manual.html
 %attr(754,root,root) /etc/rc.d/init.d/ices
+%attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
 %attr(755,root,root) %{_bindir}/*
