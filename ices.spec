@@ -3,7 +3,7 @@ Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
 Summary(pt_BR):	Mais um streamer para icecast
 Name:		ices
 Version:	0.3
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/files/%{name}/%{name}-%{version}.tar.gz
