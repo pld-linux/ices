@@ -43,7 +43,7 @@ case "$1" in
 		msg_starting ices
 		# daemon --user icecast -s /bin/sh 'ices'
 		# Our daemon function doesn't include su's --shell function
-		su icecast -s /bin/sh -c 'ices /etc/ices/ices.xml'
+		su icecast -s /bin/sh -c 'ices /etc/icecast/ices.xml'
 		touch /var/lock/subsys/ices
 	else
 		msg_already_running ices
