@@ -47,12 +47,13 @@ autoconf
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{rc.d/init.d,icecast}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{rc.d/init.d,icecast},%{_mandir}/man1}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/ices
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/icecast/ices.conf.txt
+install doc/ices.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/ices.conf.dist $RPM_BUILD_ROOT%{_sysconfdir}/icecast/%{name}.conf.dist
 
@@ -102,3 +103,4 @@ fi
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
 %attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/*
