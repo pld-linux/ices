@@ -1,5 +1,6 @@
 Summary:	ices - Program for feeding MP3 streams to an Icecast server
 Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
+Summary(pt_BR): Mais um streamer para icecast
 Name:		ices
 Version:	0.2.3
 Release:	1
@@ -30,6 +31,11 @@ Ices is a part of Icecast server. It submits mp3 files from a playlist.
 Ices jest czê¶ci± serwera Icecast. Odpowiada za dostarczanie plików
 mp3 wg playlisty do serwera Icecast.
 
+%description -l pt_BR
+ices, armed with a list of mp3 files, sends a continuous stream of mp3 data to
+an icecast server. The server is then responsible for accepting client
+connections and feeding the mp3 stream to them.
+
 %prep
 %setup -q
 
@@ -55,8 +61,6 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/icecast/ices.conf.txt
 install doc/ices.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/ices.conf.dist $RPM_BUILD_ROOT%{_sysconfdir}/icecast/%{name}.conf.dist
-
-gzip -9nf AUTHORS BUGS CHANGES FAQ README TESTED
 
 %clean
 rm -r $RPM_BUILD_ROOT
@@ -97,7 +101,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS.gz BUGS.gz CHANGES.gz FAQ.gz README.gz TESTED.gz doc/%{name}manual.html
+%doc AUTHORS BUGS CHANGES FAQ README TESTED doc/%{name}manual.html
 %attr(754,root,root) /etc/rc.d/init.d/ices
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
