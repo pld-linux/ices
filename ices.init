@@ -32,40 +32,52 @@ After choosing one of them you have to configure it before run and rename
 to /etc/icecast/ices.conf. Enjoy!                             Your PLD Team'\
 && exit 0)
 
+
 # See how we were called.
 case "$1" in
   start)
-	# Start daemons.
-	msg_starting ices
-	# daemon --user icecast -s /bin/sh 'ices'
-	# Our daemon function doesn't include su's --shell function
-	[ -f /etc/icecast/ices.conf ] && \
-	ICES_CONFIG=`file /etc/icecast/ices.conf|grep XML`
-	if [ ${ICES_CONFIG} = "" ]; then
-	su icecast -s /bin/sh -c 'ices -c /etc/icecast/ices.conf'
-	else 
-	. /etc/icecast/ices.conf
-	su icecast -s /bin/sh -c "ices ${ICES_OPTIONS}"
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/ices ]; then
+		# Start daemons.
+		msg_starting ices
+		# daemon --user icecast -s /bin/sh 'ices'
+		# Our daemon function doesn't include su's --shell function
+		[ -f /etc/icecast/ices.conf ] && \
+		ICES_CONFIG=`file /etc/icecast/ices.conf|grep XML`
+		if [ ${ICES_CONFIG} = "" ]; then
+			su icecast -s /bin/sh -c 'ices -c /etc/icecast/ices.conf'
+		else 
+			. /etc/icecast/ices.conf
+			su icecast -s /bin/sh -c "ices ${ICES_OPTIONS}"
+		fi
+		ok
+		touch /var/lock/subsys/ices
+	else
+		msg_already_running ices
 	fi
-	ok
-	touch /var/lock/subsys/ices
 	;;
   stop)
-	# Stop daemons.
-	msg_stopping ices
-	killproc ices 2> /dev/null
-	rm -f /var/lock/subsys/ices
+	if [ ! -f /var/lock/subsys/ices ]; then
+		# Stop daemons.
+		msg_stopping ices
+		killproc ices 2> /dev/null
+		rm -f /var/lock/subsys/ices
+	else
+		msg_not_running ices
+	fi
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   status)
 	status ices
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit 0
