@@ -23,7 +23,7 @@ Requires(pre):	/usr/sbin/useradd
 Requires(post,preun):/sbin/chkconfig
 Requires:	lame-libs
 Obsoletes:	shout
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Ices is a part of Icecast server. It submits mp3 files from a playlist.
