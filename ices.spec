@@ -32,16 +32,16 @@ Obsoletes:	shout
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Ices is a part of Icecast server. It submits mp3 files from a playlist.
+Ices is a part of Icecast server. It submits MP3 files from a playlist.
 
 %description -l pl
 Ices jest czê¶ci± serwera Icecast. Odpowiada za dostarczanie plików
-mp3 wg playlisty do serwera Icecast.
+MP3 wg playlisty do serwera Icecast.
 
 %description -l pt_BR
-ices, armed with a list of mp3 files, sends a continuous stream of mp3 data to
+ices, armed with a list of MP3 files, sends a continuous stream of MP3 data to
 an icecast server. The server is then responsible for accepting client
-connections and feeding the mp3 stream to them.
+connections and feeding the MP3 stream to them.
 
 %prep
 %setup -q
