@@ -1,0 +1,117 @@
+# This is the filename used as a playlist when using the builtin 
+# playlist handler.
+
+ICES_FILE="/etc/icecast/ices.playlist"
+
+# Set this to 0 if you don't want to randomize your playlist, and to 
+# 1 if you do.
+
+ICES_RANDOMIZE="0"
+
+# builtin, perl, or python.
+
+ICES_TYPE="builtin"
+
+# Module name to pass to the playlist handler if using  perl or python.
+# If you use the builtin playlist handler then this is ignored.
+
+ICES_MODULE="ices"
+
+# Set this to 1 if you want ices to launch in the background as a daemon.
+
+ICES_BACKGROUND="1"
+
+# Set this to 1 if you want to see more verbose output from ices
+
+ICES_VERBOSE="0"
+
+# This directory specifies where ices should put the logfile, cue file
+# and pid file (if daemonizing).
+
+ICES_BASEDIRECTORY="/var/log/icecast"
+
+# Hostname or ip of the icecast server you want to connect to
+
+ICES_HOSTNAME="localhost"
+
+# Port of the same
+
+ICES_PORT="8000"
+
+# Encoder password on the icecast server
+
+ICES_PASSWORD="letmein"
+
+# Header protocol to use when communicating with the server.
+# Use xaudiocast for icecast, or icy for shoutcast compatibility
+
+ICES_PROTOCOL="xaudiocast"
+
+# The name of the mountpoint on the icecast server
+
+ICES_MOUNTPOINT="/"
+
+# The name of the dumpfile on the server for your stream. DO NOT set
+# this unless you know what you're doing.
+  
+# ICES_DUMPFILE="ices.dump"
+
+# The name of you stream, not the name of the song!
+
+ICES_NAME="Cool ices default name from PLD"
+
+# Genre of your stream, be it rock or pop or whatever
+
+ICES_GENRE="Cool ices genre from PLD"
+
+# Longer description of your stream
+
+ICES_DESCRIPTION="Cool ices description from PLD"
+
+# URL to a page describing your stream
+
+ICES_URL="Cool ices URL from PLD"
+
+# 0 if you don't want the icecast server to publish your stream on
+# the yp server, 1 if you do
+
+ICES_PUBLIC="1"
+
+# Stream bitrate, used to specify bitrate if reencoding, otherwise
+# just used for display on yp and on the server. Try to keep it accurate
+
+ICES_BITRATE="128"
+
+# If this is set to 1, and ices is compiled with liblame support,
+# ices will reencode the stream on the fly to the stream bitrate.
+
+ICES=REENCODE="1"
+
+# Number of channels to reencode to, 1 for mono or 2 for stereo
+
+ICES_CHANNELS="2"
+
+# Don't touch ICES_OPTIONS !!!
+
+ICES_OPTIONS="\
+	-B ${ICES_BACKGROUND}\
+	-b ${ICES_BITRATE}\
+	-D ${ICES_BASEDIRECTORY}\
+	-d \"${ICES_DESCRIPTION}\"\
+	-F ${ICES_FILE}\
+	-g \"${ICES_GENRE}\"\
+	-h ${ICES_HOSTNAME}\
+	-i ${ICES_PROTOCOL}\
+	-M ${ICES_MODULE}\
+	-m ${ICES_MOUNTPOINT}\
+	-n \"${ICES_NAME}\"\
+	-p ${ICES_PORT}\
+	-P ${ICES_PASSWORD}\
+	-r ${ICES_RANDOMIZE}\
+	-s ${ICES_PUBLIC}\
+	-S ${ICES_TYPE}\
+	-u \"${ICES_URL}\"\
+	-N ${ICES_CHANNELS}\
+	-H ${ICES_BITRATE}\
+	"
+
