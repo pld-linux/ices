@@ -25,7 +25,7 @@ Prereq:		rc-scripts
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Ices is a part of Icecast server. It submit mp3's files from a playlist.
+Ices is a part of Icecast server. It submits mp3 files from a playlist.
 
 %description -l pl
 Ices jest czê¶ci± serwera Icecast. Odpowiada za dostarczanie plików
@@ -66,7 +66,7 @@ rm -r $RPM_BUILD_ROOT
 %pre
 if [ -n "`/usr/bin/getgid icecast`" ]; then
         if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-		echo "Warning: group icecast haven't gid=57. Correct this before installing ices." 1>&2
+		echo "Error: group icecast doesn't have gid=57. Correct this before installing ices." 1>&2
 		exit 1
 	fi
 else
@@ -74,7 +74,7 @@ else
 fi
 if [ -n "`/bin/id -u icecast 2>/dev/null`" ]; then
 	if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-		echo "Warning: user icecast haven't uid=57. Correct this before installing ices." 1>&2
+		echo "Error: user icecast doesn't have uid=57. Correct this before installing ices." 1>&2
 		exit 1
 	fi
 else
@@ -86,7 +86,7 @@ chkconfig --add ices
 if [ -f /var/lock/subsys/ices ]; then
         /etc/rc.d/init.d/ices restart >&2
 else
-        echo "Run '/etc/rc.d/init.d/ices start' to start ices deamon." >&2
+        echo "Run '/etc/rc.d/init.d/ices start' to start ices daemon." >&2
 fi
 
 %preun
