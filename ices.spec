@@ -16,13 +16,18 @@ BuildRequires:	automake
 BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
 BuildRequires:	python-devel
+BuildRequires:	rpmbuild(macros) >= 1.159
 PreReq:		rc-scripts
 Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
 Requires(post,preun):/sbin/chkconfig
 Requires:	lame-libs
+Provides:	group(icecast)
+Provides:	user(icecast)
 Obsoletes:	shout
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -102,6 +107,12 @@ if [ "$1" = "0" ] ; then
 		/etc/rc.d/init.d/ices stop >&2
 	fi
 	/sbin/chkconfig --del ices >&2
+fi
+
+%postun
+if [ "$1" = "0" ]; then
+	%userremove icecast
+	%groupremove icecast
 fi
 
 %files
