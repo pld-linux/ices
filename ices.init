@@ -45,7 +45,7 @@ case "$1" in
 	status ices
 	;;
   *)
-	show "Usage: %s {start|stop|restart|status}" "ices"
+	msg_Usage "$0 {start|stop|restart|status}"
 	exit 1
 esac
 
