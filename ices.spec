@@ -2,12 +2,12 @@ Summary:	ices - Program for feeding MP3 streams to an Icecast server
 Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
 Summary(pt_BR):	Mais um streamer para icecast
 Name:		ices
-Version:	0.2.3
+Version:	0.3
 Release:	1
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://www.icecast.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	8133a5abd7e68842841e509e08d7cef7
+Source0:	http://www.icecast.org/files/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	cb7bae83597945e90094a46a9f15bd91
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
 URL:		http://www.icecast.org/
@@ -42,12 +42,14 @@ connections and feeding the mp3 stream to them.
 
 %build
 cp -f %{_datadir}/automake/config.* .
-%{__aclocal}
-%{__autoconf}
+rm -f missing
 %configure \
 	--enable-fsstd \
 	--enable-libwrap \
-	--without-readline
+	--without-readline \
+	--without-python \
+	--without-perl \
+	--without-lame
 
 %{__make}
 
@@ -103,9 +105,10 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS CHANGES FAQ README TESTED doc/%{name}manual.html
+%doc AUTHORS BUGS README README.playlist doc/%{name}manual.html
 %attr(754,root,root) /etc/rc.d/init.d/ices
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
+%attr(640,root,icecast) %config %{_sysconfdir}/modules/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
