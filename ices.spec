@@ -1,14 +1,13 @@
 Summary:	ices - Program for feeding MP3 streams to an Icecast server
 Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
 Name:		ices
-Version:	0.2.2
-Release:	0.3
+Version:	0.2.3
+Release:	1
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/releases/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
-Patch0:		%{name}-libtool_fix.patch
 URL:		http://www.icecast.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -33,7 +32,6 @@ mp3 wg playlisty do serwera Icecast.
 
 %prep
 %setup -q
-%patch0
 
 %build
 cp -f %{_datadir}/automake/config.* .
