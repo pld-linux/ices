@@ -1,6 +1,6 @@
 Summary:	ices - Program for feeding MP3 streams to an Icecast server
 Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
-Summary(pt_BR): Mais um streamer para icecast
+Summary(pt_BR):	Mais um streamer para icecast
 Name:		ices
 Version:	0.2.3
 Release:	1
@@ -16,10 +16,10 @@ BuildRequires:	automake
 BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
 PreReq:		rc-scripts
-Requires(pre): /bin/id
-Requires(pre): /usr/bin/getgid
-Requires(pre): /usr/sbin/groupadd
-Requires(pre): /usr/sbin/useradd
+Requires(pre):	/bin/id
+Requires(pre):	/usr/bin/getgid
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
 Requires(post,preun):/sbin/chkconfig
 Requires:	lame-libs
 Obsoletes:	shout
@@ -69,36 +69,36 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 if [ -n "`/usr/bin/getgid icecast`" ]; then
-        if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-               echo "Error: group icecast doesn't have gid=57. Correct this before installing ices." 1>&2
-               exit 1
-       fi
+	if [ "`/usr/bin/getgid icecast`" != "57" ]; then
+		echo "Error: group icecast doesn't have gid=57. Correct this before installing ices." 1>&2
+		exit 1
+	fi
 else
-       /usr/sbin/groupadd -g 57 -r -f icecast
+	/usr/sbin/groupadd -g 57 -r -f icecast
 fi
 if [ -n "`/bin/id -u icecast 2>/dev/null`" ]; then
-       if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-               echo "Error: user icecast doesn't have uid=57. Correct this before installing ices." 1>&2
-               exit 1
-       fi
+	if [ "`/usr/bin/getgid icecast`" != "57" ]; then
+		echo "Error: user icecast doesn't have uid=57. Correct this before installing ices." 1>&2
+		exit 1
+	fi
 else
-       /usr/sbin/useradd -u 57 -r -d /dev/null -s /bin/false -c "ices" -g icecast icecast 1>&2
+	/usr/sbin/useradd -u 57 -r -d /dev/null -s /bin/false -c "ices" -g icecast icecast 1>&2
 fi
 
 %post
 /sbin/chkconfig --add ices
 if [ -f /var/lock/subsys/ices ]; then
-        /etc/rc.d/init.d/ices restart >&2
+	/etc/rc.d/init.d/ices restart >&2
 else
-        echo "Run '/etc/rc.d/init.d/ices start' to start ices daemon." >&2
+	echo "Run '/etc/rc.d/init.d/ices start' to start ices daemon." >&2
 fi
 
 %preun
 if [ "$1" = "0" ] ; then
-        if [ -f /var/lock/subsys/ices ]; then
-                /etc/rc.d/init.d/ices stop >&2
-        fi
-        /sbin/chkconfig --del ices >&2
+	if [ -f /var/lock/subsys/ices ]; then
+		/etc/rc.d/init.d/ices stop >&2
+	fi
+	/sbin/chkconfig --del ices >&2
 fi
 
 %files
