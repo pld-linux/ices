@@ -6,7 +6,7 @@ Version:	0.4
 Release:	1
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://downloads.xiph.org/releases/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://downloads.xiph.org/releases/ices/%{name}-%{version}.tar.gz
 # Source0-md5:	d31450c4011561dae0229f071cb41cb6
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
@@ -47,8 +47,7 @@ connections and feeding the MP3 stream to them.
 %setup -q
 
 %build
-cp -f %{_datadir}/automake/config.* .
-rm -f missing
+cp -f /usr/share/automake/config.* .
 %configure \
 	--enable-fsstd \
 	--enable-libwrap \
@@ -119,7 +118,7 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS README README.playlist doc/%{name}manual.html
 %attr(754,root,root) /etc/rc.d/init.d/ices
-%attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
-%attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
+%attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/ices.conf.txt
+%attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/ices.conf.dist
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
