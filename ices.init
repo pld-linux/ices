@@ -27,7 +27,7 @@ fi
 [ -f /etc/icecast/ices.conf ] || (echo \
 'There are two config files:
 /etc/icecast/ices.conf.dist - default config (you must have XML support);
-/etc/icecast/ices.conf.txt - text config file made for PLD by jack@pld.org.pl
+/etc/icecast/ices.conf.txt - text config file made for PLD by jack@pld-linux.org
 After choosing one of them you have to configure it before run and rename 
 to /etc/icecast/ices.conf. Enjoy!                             Your PLD Team'\
 && exit 0)
