@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	8133a5abd7e68842841e509e08d7cef7
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
 URL:		http://www.icecast.org/
