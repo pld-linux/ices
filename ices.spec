@@ -15,10 +15,7 @@ BuildRequires:	automake
 BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
 Requires:	lame-libs
-Requires(pre):	/bin/id
-Requires(pre):	/usr/bin/getgid
-Requires(pre):	/usr/sbin/groupadd
-Requires(pre):	/usr/sbin/useradd
+Requires(pre):	user-icecast
 Requires(post,preun):/sbin/chkconfig
 Obsoletes:	shout
 Prereq:		rc-scripts
@@ -64,24 +61,6 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/ices.conf.dist $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -r $RPM_BUILD_ROOT
-
-%pre
-if [ -n "`/usr/bin/getgid icecast`" ]; then
-        if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-		echo "Error: group icecast doesn't have gid=57. Correct this before installing ices." 1>&2
-		exit 1
-	fi
-else
-	/usr/sbin/groupadd -g 57 -r -f icecast
-fi
-if [ -n "`/bin/id -u icecast 2>/dev/null`" ]; then
-	if [ "`/usr/bin/getgid icecast`" != "57" ]; then
-		echo "Error: user icecast doesn't have uid=57. Correct this before installing ices." 1>&2
-		exit 1
-	fi
-else
-	/usr/sbin/useradd -u 57 -r -d /dev/null -s /bin/false -c "ices" -g icecast icecast 1>&2
-fi
 
 %post
 chkconfig --add ices
