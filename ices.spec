@@ -7,6 +7,7 @@ License:	GPL v2
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/releases/%{name}-%{version}.tar.gz
 # Source1:	%{name}.init
+Patch0:		ices-libtool_fix.patch
 URL:		http://www.icecast.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -27,6 +28,7 @@ wg playlisty do serwera Icecast.
 
 %prep
 %setup -q
+%patch0
 
 %build
 cp -f %{_datadir}/automake/config.* .
