@@ -3,9 +3,9 @@
 # ices		This shell script takes care of starting and stopping
 #		ices.
 #
-# chkconfig: 345 96 24
-# description: Icecast is an Internet audio broadcasting system based on
-#              MPEG audio technology. Ices is a streamer for icecast.
+# chkconfig:	345 96 24
+# description:	Icecast is an Internet audio broadcasting system based on
+#		MPEG audio technology. Ices is a streamer for icecast.
 
 # Source function library.
 . /etc/rc.d/init.d/functions
@@ -14,7 +14,14 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-[ ${NETWORKING} = "no" ] && exit 0
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down ices
+		exit 1
+	fi
+else
+	exit 0
+fi
 
 # Check that ices.conf exists.
 [ -f /etc/icecast/ices.conf ] || (echo \
@@ -28,7 +35,7 @@ to /etc/icecast/ices.conf. Enjoy!                             Your PLD Team'\
 # See how we were called.
 case "$1" in
   start)
-        # Start daemons.
+	# Start daemons.
 	msg_starting ices
 	# daemon --user icecast -s /bin/sh 'ices'
 	# Our daemon function doesn't include su's --shell function
@@ -44,20 +51,20 @@ case "$1" in
 	touch /var/lock/subsys/ices
 	;;
   stop)
-        # Stop daemons.
+	# Stop daemons.
 	msg_stopping ices
 	killproc ices 2> /dev/null
 	rm -f /var/lock/subsys/ices
 	;;
-  restart)
-        $0 stop
-        $0 start
-        ;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
   status)
 	status ices
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|status}"
+	msg_usage "$0 {start|stop|restart|reload|status}"
 	exit 1
 esac
 
