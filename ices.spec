@@ -41,7 +41,7 @@ connections and feeding the mp3 stream to them.
 
 %build
 cp -f %{_datadir}/automake/config.* .
-aclocal
+%{__aclocal}
 %{__autoconf}
 %configure \
 	--enable-fsstd \
