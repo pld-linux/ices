@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# ices		This shell script takes care of starting and stopping
+#		ices.
+#
+# chkconfig: 345 96 24
+# description: Icecast is an Internet audio broadcasting system based on
+#              MPEG audio technology. Ices is a streamer for icecast.
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+# Check that ices.conf exists.
+[ -f /etc/icecast/ices.conf ] || exit 0
+
+
+# See how we were called.
+case "$1" in
+  start)
+        # Start daemons.
+	msg_starting ices
+	# daemon --user icecast -s /bin/sh 'ices'
+	# Our daemon function doesn't include su's --shell function
+# NFY	su icecast -s /bin/sh -c 'ices -z -r -t -3' 2>1 > /dev/null
+	ok
+	touch /var/lock/subsys/ices
+	;;
+  stop)
+        # Stop daemons.
+	msg_stopping ices
+	killproc ices 2> /dev/null
+	rm -f /var/lock/subsys/ices
+	;;
+  restart)
+        $0 stop
+        $0 start
+        ;;
+  status)
+	status ices
+	;;
+  *)
+	show "Usage: %s {start|stop|restart|status}" "ices"
+	exit 1
+esac
+
+exit 0
