@@ -38,7 +38,7 @@ mp3 wg playlisty do serwera Icecast.
 %build
 cp -f %{_datadir}/automake/config.* .
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--enable-fsstd \
 	--enable-libwrap \
