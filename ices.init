@@ -27,7 +27,7 @@ case "$1" in
 	msg_starting ices
 	# daemon --user icecast -s /bin/sh 'ices'
 	# Our daemon function doesn't include su's --shell function
-# NFY	su icecast -s /bin/sh -c 'ices -z -r -t -3' 2>1 > /dev/null
+	su icecast -s /bin/sh -c 'ices -B' > /dev/null
 	ok
 	touch /var/lock/subsys/ices
 	;;
