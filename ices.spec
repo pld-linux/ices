@@ -15,14 +15,14 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
-Requires:	lame-libs
+PreReq:		rc-scripts
 Requires(pre): /bin/id
 Requires(pre): /usr/bin/getgid
 Requires(pre): /usr/sbin/groupadd
 Requires(pre): /usr/sbin/useradd
 Requires(post,preun):/sbin/chkconfig
+Requires:	lame-libs
 Obsoletes:	shout
-Prereq:		rc-scripts
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,18 +53,19 @@ cp -f %{_datadir}/automake/config.* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{rc.d/init.d,icecast},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/icecast,/etc/rc.d/init.d,%{_mandir}/man1}
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/ices
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/icecast/ices.conf.txt
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/icecast/ices.conf.txt
 install doc/ices.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/ices.conf.dist $RPM_BUILD_ROOT%{_sysconfdir}/icecast/%{name}.conf.dist
 
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %pre
 if [ -n "`/usr/bin/getgid icecast`" ]; then
@@ -85,7 +86,7 @@ else
 fi
 
 %post
-chkconfig --add ices
+/sbin/chkconfig --add ices
 if [ -f /var/lock/subsys/ices ]; then
         /etc/rc.d/init.d/ices restart >&2
 else
