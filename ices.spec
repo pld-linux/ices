@@ -10,7 +10,7 @@ Source0:	http://www.icecast.org/files/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	cb7bae83597945e90094a46a9f15bd91
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
-URL:		http://www.icecast.org/
+URL:		http://www.icecast.org/ices.php
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	lame-libs-devel
