@@ -3,7 +3,7 @@ Summary(pl):	ices - program dostarczaj±cy strumienie MP3 do serwera Icecast
 Summary(pt_BR):	Mais um streamer para icecast
 Name:		ices
 Version:	0.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://www.icecast.org/files/%{name}/%{name}-%{version}.tar.gz
@@ -47,9 +47,9 @@ rm -f missing
 	--enable-fsstd \
 	--enable-libwrap \
 	--without-readline \
-	--without-python \
-	--without-perl \
-	--without-lame
+	--with-python \
+	--with-perl \
+	--with-lame
 
 %{__make}
 
@@ -109,6 +109,5 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/ices
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.txt
 %attr(640,root,icecast) %config %{_sysconfdir}/icecast/ices.conf.dist
-%attr(640,root,icecast) %config %{_sysconfdir}/modules/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
