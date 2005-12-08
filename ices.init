@@ -29,7 +29,7 @@ fi
 /etc/icecast/ices-oss.xml - conf for oss;
 /etc/icecast/ices-alsa.xml - conf for alsa;
 /etc/icecast/ices-playlist.xml - conf for playlist;
-After choosing one of them you have to configure it before run and rename 
+After choosing one of them you have to configure it before run and rename
 to /etc/icecast/ices.xml. Enjoy!                             Your PLD Team'\
 && exit 0)
 
