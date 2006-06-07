@@ -65,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 %groupadd -g 57 icecast
-%useradd -u 57 -r -d /dev/null -s /bin/false -c "ices" -g icecast icecast
+%useradd -u 57 -r -d /usr/share/empty -s /bin/false -c "ices" -g icecast icecast
 
 %post
 /sbin/chkconfig --add ices
