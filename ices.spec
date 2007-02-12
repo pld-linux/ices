@@ -1,8 +1,8 @@
 # TODO: check init files 
 
 Summary:	ices2 - Program for feeding MP3 and OGG streams to an Icecast server
-Summary(pl):	ices2 - program dostarczaj±cy strumienie MP3 oraz OGG do serwera Icecast
-Summary(pt_BR):	Mais um streamer para icecast
+Summary(pl.UTF-8):   ices2 - program dostarczajÄ…cy strumienie MP3 oraz OGG do serwera Icecast
+Summary(pt_BR.UTF-8):   Mais um streamer para icecast
 Name:		ices
 Version:	2.0.1
 Release:	1
@@ -36,8 +36,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Ices is a part of Icecast server. It submits MP3 and OGG files from a playlist.
 
-%description -l pl
-Ices jest czê¶ci± serwera Icecast. Odpowiada za dostarczanie plików
+%description -l pl.UTF-8
+Ices jest czÄ™Å›ciÄ… serwera Icecast. Odpowiada za dostarczanie plikÃ³w
 MP3 i OGG wg playlisty do serwera Icecast.
 
 %prep
