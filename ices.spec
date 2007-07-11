@@ -15,7 +15,6 @@ Source2:	%{name}.conf.txt
 URL:		http://www.icecast.org/ices.php
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	lame-libs-devel
 BuildRequires:	libshout-devel
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.202
