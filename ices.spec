@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	ices2 - program dostarczający strumienie MP3 oraz OGG do ser
 Summary(pt_BR.UTF-8):	Mais um streamer para icecast
 Name:		ices
 Version:	2.0.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://downloads.xiph.org/releases/ices/%{name}-%{version}.tar.bz2
