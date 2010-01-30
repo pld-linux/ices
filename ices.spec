@@ -16,6 +16,7 @@ URL:		http://www.icecast.org/ices.php
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libshout-devel
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.202
 PreReq:		rc-scripts
@@ -59,6 +60,10 @@ install debian/ices2.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 mv -f conf/*.xml $RPM_BUILD_ROOT%{_sysconfdir}/icecast/
 
+# files *.html, *.css go to doc
+# files *.xml, ices.conf.txt go to _sysconfdir
+rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/{*.html,*.css,*.xml,ices.conf.txt}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -92,6 +97,6 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS README TODO doc/*.html doc/style.css
 %attr(754,root,root) /etc/rc.d/init.d/ices
-%attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/*.xml
+%attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
