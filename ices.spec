@@ -1,4 +1,4 @@
-# TODO: check init files 
+# TODO: check init files
 
 Summary:	ices2 - Program for feeding MP3 and OGG streams to an Icecast server
 Summary(pl.UTF-8):	ices2 - program dostarczający strumienie MP3 oraz OGG do serwera Icecast
@@ -13,28 +13,32 @@ Source0:	http://downloads.xiph.org/releases/ices/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
 URL:		http://www.icecast.org/ices.php
+BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gcc-c++
 BuildRequires:	libshout-devel
+BuildRequires:	libxml2-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.202
-PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires(postun):	/usr/sbin/groupdel
-Requires(postun):	/usr/sbin/userdel
-Requires(post,preun):/sbin/chkconfig
 Requires:	lame-libs
+Requires:	rc-scripts
 Provides:	group(icecast)
 Provides:	user(icecast)
 Obsoletes:	shout
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Ices is a part of Icecast server. It submits MP3 and OGG files from a playlist.
+Ices is a part of Icecast server. It submits MP3 and OGG files from a
+playlist.
 
 %description -l pl.UTF-8
 Ices jest częścią serwera Icecast. Odpowiada za dostarczanie plików
@@ -98,5 +102,5 @@ fi
 %doc AUTHORS README TODO doc/*.html doc/style.css
 %attr(754,root,root) /etc/rc.d/init.d/ices
 %attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/*
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
+%attr(755,root,root) %{_bindir}/ices
+%{_mandir}/man1/ices2.1*
