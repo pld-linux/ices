@@ -1,20 +1,21 @@
 # TODO: check init files
+# - roaraudio-devel >= 0.4.0 ?
 
 Summary:	ices2 - Program for feeding MP3 and OGG streams to an Icecast server
 Summary(pl.UTF-8):	ices2 - program dostarczający strumienie MP3 oraz OGG do serwera Icecast
 Summary(pt_BR.UTF-8):	Mais um streamer para icecast
 Name:		ices
-Version:	2.0.2
-Release:	2
+Version:	2.0.3
+Release:	1
 License:	GPL v2
 Group:		Applications/Sound
 Source0:	http://downloads.xiph.org/releases/ices/%{name}-%{version}.tar.bz2
-# Source0-md5:	832c448cc993170a70fd95804fcda5b2
+# Source0-md5:	df201d7c034ca93ff46202a2c1413b72
 Source1:	%{name}.init
 Source2:	%{name}.conf.txt
 URL:		http://www.icecast.org/ices.php
 BuildRequires:	alsa-lib-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	gcc-c++
 BuildRequires:	libshout-devel
@@ -48,7 +49,8 @@ MP3 i OGG wg playlisty do serwera Icecast.
 %setup -q
 
 %build
-%configure
+%configure \
+	--disable-roaraudio
 %{__make}
 
 %install
@@ -98,7 +100,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README TODO doc/*.html doc/style.css
+%doc AUTHORS README.md doc/*.html doc/style.css
 %attr(754,root,root) /etc/rc.d/init.d/ices
 %attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/ices-alsa.xml
 %attr(640,root,icecast) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/icecast/ices-oss.xml
